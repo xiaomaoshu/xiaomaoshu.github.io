@@ -89,10 +89,19 @@
 <meta property="og:site_name" content="小猫叔博客">
 <meta property="og:description" content="简介LAMP指Linux+Apache+Mysql/MariaDB+Perl/PHP/Python是一组常用来搭建动态网站或者服务器的开源软件，本身都是各自独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了一个强大的Web应用程序平台。 部署方式在云服务器下部署LAMP通常有三种部署方式，镜像部署、一键安装包部署和手动部署（源码编译安装/YUM安装），一般推荐镜像部署适合新手">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-02T05:40:08.098Z">
+<meta property="og:image" content="https://xiaomaoshu.github.io/images/e302ea8182d69aa2f4c3ec50f6c48dc2.png">
+<meta property="og:image" content="https://xiaomaoshu.github.io/images/e5fb57005c59e91f75ecbc2cee334e8d.png">
+<meta property="og:image" content="https://xiaomaoshu.github.io/images/e9af0a1f6d1f4af8cc22caec10c40c75.png">
+<meta property="og:image" content="https://xiaomaoshu.github.io/images/dd14e716abb13e0d04b801a5310bee27.png">
+<meta property="og:image" content="https://xiaomaoshu.github.io/images/bb95faed7792a7d8604f04209baad042.png">
+<meta property="og:image" content="https://xiaomaoshu.github.io/images/4d2c3aa38f467eed342a6dad5961935b.png">
+<meta property="og:image" content="https://xiaomaoshu.github.io/images/c3143ee7b96bfe34f8d32f0eecd5053b.png">
+<meta property="og:image" content="https://xiaomaoshu.github.io/images/764fbec1647ac8ec0fb3c2379ba04cd7.png">
+<meta property="og:updated_time" content="2018-11-02T14:51:04.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS 7.2 下安装部署 LAMP 详解">
 <meta name="twitter:description" content="简介LAMP指Linux+Apache+Mysql/MariaDB+Perl/PHP/Python是一组常用来搭建动态网站或者服务器的开源软件，本身都是各自独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了一个强大的Web应用程序平台。 部署方式在云服务器下部署LAMP通常有三种部署方式，镜像部署、一键安装包部署和手动部署（源码编译安装/YUM安装），一般推荐镜像部署适合新手">
+<meta name="twitter:image" content="https://xiaomaoshu.github.io/images/e302ea8182d69aa2f4c3ec50f6c48dc2.png">
 
 
 
@@ -485,7 +494,7 @@
             <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
             </span>
 			<span class="post-meta-divider">|</span>
-			<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 1.5k</span>
+			<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 1.6k</span>
           
 
           
@@ -531,36 +540,151 @@
 <p>Php版本：7.0.12</p>
 <p>安装前准备<br>CentOS 7.2系统默认开启了防火墙，需关闭后外部才可访问本机的80、21等端口，如需做安全类配置可自行参考官方文档。</p>
 <p>关闭防火墙：</p>
-<p>systemctl stop firewalld.service<br>关闭防火墙开机自启动：</p>
-<p>systemctl disable firewalld.service<br>安装vim及unzip：</p>
-<p>yum install -y vim unzip<br>编译安装apache准备<br>编译安装apache前需要安装apr、apr-util和pcre软件包和相关依赖包。</p>
-<p>yum install -y gcc gcc-c++ autoconf libtool<br>安装apr<br>cd /usr/local/src/<br>wget <a href="http://oss.aliyuncs.com/aliyunecs/onekey/apache/apr-1.5.0.tar.gz" target="_blank" rel="noopener">http://oss.aliyuncs.com/aliyunecs/onekey/apache/apr-1.5.0.tar.gz</a><br>tar zxvf apr-1.5.0.tar.gz<br>cd apr-1.5.0<br>./configure –prefix=/usr/local/apr<br>make &amp;&amp; make install<br>安装apr-util<br>cd /usr/local/src/<br>wget <a href="http://oss.aliyuncs.com/aliyunecs/onekey/apache/apr-util-1.5.3.tar.gz" target="_blank" rel="noopener">http://oss.aliyuncs.com/aliyunecs/onekey/apache/apr-util-1.5.3.tar.gz</a><br>tar zxvf apr-util-1.5.3.tar.gz<br>cd apr-util-1.5.3<br>./configure –prefix=/usr/local/apr-util –with-apr=/usr/local/apr<br>make &amp;&amp; make install<br>安装pcre<br>cd /usr/local/src/<br>wget <a href="http://zy-res.oss-cn-hangzhou.aliyuncs.com/pcre/pcre-8.38.tar.gz" target="_blank" rel="noopener">http://zy-res.oss-cn-hangzhou.aliyuncs.com/pcre/pcre-8.38.tar.gz</a><br>tar zxvf pcre-8.38.tar.gz<br>cd pcre-8.38<br>./configure –prefix=/usr/local/pcre<br>make &amp;&amp; make install<br>编译安装Apache<br>cd /usr/local/src/<br>wget <a href="http://zy-res.oss-cn-hangzhou.aliyuncs.com/apache/httpd-2.4.23.tar.gz" target="_blank" rel="noopener">http://zy-res.oss-cn-hangzhou.aliyuncs.com/apache/httpd-2.4.23.tar.gz</a><br>tar zxvf httpd-2.4.23.tar.gz<br>cd httpd-2.4.23<br>./configure \<br>–prefix=/usr/local/apache –sysconfdir=/etc/httpd \<br>–enable-so –enable-cgi –enable-rewrite \<br>–with-zlib –with-pcre=/usr/local/pcre \<br>–with-apr=/usr/local/apr \<br>–with-apr-util=/usr/local/apr-util \<br>–enable-mods-shared=most –enable-mpms-shared=all \<br>–with-mpm=event<br>make &amp;&amp; make install<br>修改httpd.conf配置文件参数<br>cd /etc/httpd/<br>vim httpd.conf<br>1.找到Directory参数，注释掉Require all denied添加Require all granted。</p>
-<p>1</p>
-<p>2.找到ServerName参数，添加ServerName localhost:80 然后，按Esc键后输入:wq保存退出。</p>
-<p>2</p>
-<p>设置PidFile路径<br>vim /etc/httpd/httpd.conf<br>在配置文件最后添加以下内容:</p>
-<p>PidFile”/var/run/httpd.pid”<br>启动Apache服务并验证<br>cd /usr/local/apache/bin/<br>./apachectl start<br>netstat -tnlp #查看服务是否开启<br>3</p>
-<p>在本地浏览器中输入云服务器的公网IP地址验证，出现下图表示安装成功。</p>
-<p>4</p>
+<pre><code>#systemctl stop firewalld.service
+</code></pre><p>关闭防火墙开机自启动：</p>
+<pre><code>#systemctl disable firewalld.service
+</code></pre><p>安装vim及unzip：</p>
+<pre><code>#yum install -y vim unzip
+</code></pre><p>编译安装apache准备<br>编译安装apache前需要安装apr、apr-util和pcre软件包和相关依赖包。</p>
+<pre><code>#yum install -y gcc gcc-c++ autoconf libtool
+</code></pre><p>安装apr</p>
+<pre><code>#cd /usr/local/src/
+#wget http://oss.aliyuncs.com/aliyunecs/onekey/apache/apr-1.5.0.tar.gz
+#tar zxvf apr-1.5.0.tar.gz
+#cd apr-1.5.0
+#./configure --prefix=/usr/local/apr
+#make &amp;&amp; make install
+</code></pre><p>安装apr-util</p>
+<pre><code>#cd /usr/local/src/
+#wget http://oss.aliyuncs.com/aliyunecs/onekey/apache/apr-util-1.5.3.tar.gz
+#tar zxvf apr-util-1.5.3.tar.gz
+#cd apr-util-1.5.3
+#./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr
+#make &amp;&amp; make install
+</code></pre><p>安装pcre</p>
+<pre><code>#cd /usr/local/src/
+#wget http://zy-res.oss-cn-hangzhou.aliyuncs.com/pcre/pcre-8.38.tar.gz
+#tar zxvf pcre-8.38.tar.gz
+#cd pcre-8.38
+#./configure --prefix=/usr/local/pcre
+#make &amp;&amp; make install
+</code></pre><p>编译安装Apache</p>
+<pre><code>    #cd /usr/local/src/
+    #wget http://zy-res.oss-cn-hangzhou.aliyuncs.com/apache/httpd-2.4.23.tar.gz
+    #tar zxvf httpd-2.4.23.tar.gz
+    #cd httpd-2.4.23
+    #./configure \
+--prefix=/usr/local/apache --sysconfdir=/etc/httpd \
+--enable-so --enable-cgi --enable-rewrite \
+--with-zlib --with-pcre=/usr/local/pcre \
+--with-apr=/usr/local/apr \
+--with-apr-util=/usr/local/apr-util \
+--enable-mods-shared=most --enable-mpms-shared=all \
+--with-mpm=event
+    #make &amp;&amp; make install
+</code></pre><p>修改httpd.conf配置文件参数</p>
+<pre><code>#cd /etc/httpd/
+#vim httpd.conf
+</code></pre><p>1.找到Directory参数，注释掉Require all denied添加Require all granted。<br><img src="/images/e302ea8182d69aa2f4c3ec50f6c48dc2.png" alt=""><br>2.找到ServerName参数，添加ServerName localhost:80 然后，按Esc键后输入:wq保存退出。<br><img src="/images/e5fb57005c59e91f75ecbc2cee334e8d.png" alt=""></p>
+<p>设置PidFile路径</p>
+<pre><code>#vim /etc/httpd/httpd.conf
+</code></pre><p>在配置文件最后添加以下内容:</p>
+<p>PidFile”/var/run/httpd.pid”<br>启动Apache服务并验证</p>
+<pre><code>#cd /usr/local/apache/bin/
+#./apachectl start
+#netstat -tnlp #查看服务是否开启
+</code></pre><p><img src="/images/e9af0a1f6d1f4af8cc22caec10c40c75.png" alt=""><br>在本地浏览器中输入云服务器的公网IP地址验证，出现下图表示安装成功。</p>
+<p><img src="/images/dd14e716abb13e0d04b801a5310bee27.png" alt=""></p>
 <p>设置开机自启<br>在rc.local文件中添加/usr/local/apache/bin/apachectl start，然后输入:wq保存退出。</p>
-<p>vim /etc/rc.d/rc.local<br>5</p>
-<p>设置环境变量<br>vi /root/.bash_profile<br>在PATH=$PATH:$HOME/bin添加参数为：</p>
-<p>PATH=$PATH:$HOME/bin:/usr/local/apache/bin<br>然后输入:wq保存退出，执行：</p>
-<p>source /root/.bash_profile<br>编译安装MySQL前预准备<br>首先检查系统中是否存在使用rpm安装的mysql或者mariadb，如果有需要先删除后再编译安装。</p>
-<p>rpm -qa | grep mysql #由下至上依次卸载<br>rpm -qa | grep mariadb<br>rpm -e xxx #一般使用此命令即可卸载成功<br>rpm -e –nodeps xxx #卸载不成功时使用此命令强制卸载<br>卸载完以后用 rpm -qa|grep mariadb 或者 rpm -qa|grep mysql 查看结果。</p>
-<p>安装mysql<br>yum install -y libaio-<em>#安装依赖<br>mkdir -p /usr/local/mysql<br>cd /usr/local/src<br>wget <a href="http://zy-res.oss-cn-hangzhou.aliyuncs.com/mysql/mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz" target="_blank" rel="noopener">http://zy-res.oss-cn-hangzhou.aliyuncs.com/mysql/mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz</a><br>tar -xzvf mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz<br>mv mysql-5.7.17-linux-glibc2.5-x86_64/</em> /usr/local/mysql/<br>建立mysql组和用户，并将mysql用户添加到mysql组<br>groupadd mysql<br>useradd -g mysql -s /sbin/nologin mysql<br>初始化mysql数据库<br>/usr/local/mysql/bin/mysqld –initialize-insecure –datadir=/usr/local/mysql/data/–user=mysql<br>更改mysql安装目录的属主属组<br>chown -R mysql:mysql /usr/local/mysql<br>chown -R mysql:mysql /usr/local/mysql/data/<br>chown -R mysql:mysql /usr/local/mysql<br>设置开机自启<br>cd /usr/local/mysql/support-files/<br>cp mysql.server /etc/init.d/mysqld<br>chmod +x /etc/init.d/mysqld # 添加执行权限<br>vim /etc/rc.d/rc.local<br>添加/etc/init.d/mysqld start到rc.local文件中，然后输入:wq保存退出。</p>
-<p>设置环境变量<br>vi /root/.bash_profile<br>在PATH=$PATH:$HOME/bin添加参数为：</p>
-<p>PATH=$PATH:$HOME/bin:/usr/local/mysql/bin:/usr/local/mysql/lib<br>然后输入:wq保存退出，输入:</p>
-<p>source /root/.bash_profile<br>启动MySQL数据库<br>/etc/init.d/mysqld start<br>7</p>
-<p>修改Mysql的root用户密码<br>初始化后mysql为空密码可直接登录，为了保证安全性需要修改mysql的root用户密码。</p>
-<p>mysqladmin -u root password ‘xxxx’<br>测试登录MySQL数据库<br>mysql -uroot -p密码#-p和密码之间无空格<br>8</p>
+<pre><code>#vim /etc/rc.d/rc.local
+</code></pre><p><img src="/images/bb95faed7792a7d8604f04209baad042.png" alt=""></p>
+<p>设置环境变量</p>
+<pre><code>#vi /root/.bash_profile
+</code></pre><p>在PATH=$PATH:$HOME/bin添加参数为：</p>
+<pre><code>#PATH=$PATH:$HOME/bin:/usr/local/apache/bin
+</code></pre><p>然后输入:wq保存退出，执行：</p>
+<pre><code>#source /root/.bash_profile
+</code></pre><p>编译安装MySQL前预准备<br>首先检查系统中是否存在使用rpm安装的mysql或者mariadb，如果有需要先删除后再编译安装。</p>
+<pre><code>#rpm -qa | grep mysql #由下至上依次卸载
+#rpm -qa | grep mariadb
+#rpm -e xxx #一般使用此命令即可卸载成功
+#rpm -e --nodeps xxx #卸载不成功时使用此命令强制卸载
+</code></pre><p>卸载完以后用 rpm -qa|grep mariadb 或者 rpm -qa|grep mysql 查看结果。</p>
+<p>安装mysql</p>
+<pre><code>#yum install -y libaio-*#安装依赖
+#mkdir -p /usr/local/mysql
+#cd /usr/local/src
+#wgethttp://zy-res.oss-cn-hangzhou.aliyuncs.com/mysql/mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz
+#tar -xzvf mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz
+#mv mysql-5.7.17-linux-glibc2.5-x86_64/* /usr/local/mysql/
+</code></pre><p>建立mysql组和用户，并将mysql用户添加到mysql组</p>
+<pre><code>#groupadd mysql
+#useradd -g mysql -s /sbin/nologin mysql
+</code></pre><p>初始化mysql数据库</p>
+<pre><code>#/usr/local/mysql/bin/mysqld --initialize-insecure --datadir=/usr/local/mysql/data/--user=mysql
+</code></pre><p>更改mysql安装目录的属主属组</p>
+<pre><code>#chown -R mysql:mysql /usr/local/mysql
+#chown -R mysql:mysql /usr/local/mysql/data/
+#chown -R mysql:mysql /usr/local/mysql
+</code></pre><p>设置开机自启</p>
+<pre><code>#cd /usr/local/mysql/support-files/
+#cp mysql.server /etc/init.d/mysqld
+#chmod +x /etc/init.d/mysqld # 添加执行权限
+#vim /etc/rc.d/rc.local
+</code></pre><p>添加/etc/init.d/mysqld start到rc.local文件中，然后输入:wq保存退出。</p>
+<p>设置环境变量</p>
+<pre><code>#vi /root/.bash_profile
+</code></pre><p>在PATH=$PATH:$HOME/bin添加参数为：</p>
+<pre><code>#PATH=$PATH:$HOME/bin:/usr/local/mysql/bin:/usr/local/mysql/lib
+</code></pre><p>然后输入:wq保存退出，输入:</p>
+<pre><code>#source /root/.bash_profile
+</code></pre><p>启动MySQL数据库</p>
+<pre><code>#/etc/init.d/mysqld start
+</code></pre><p>修改Mysql的root用户密码<br>初始化后mysql为空密码可直接登录，为了保证安全性需要修改mysql的root用户密码。</p>
+<pre><code>#mysqladmin -u root password &apos;xxxx&apos;
+</code></pre><p>测试登录MySQL数据库<br>mysql -uroot -p密码#-p和密码之间无空格<br><img src="/images/4d2c3aa38f467eed342a6dad5961935b.png" alt=""></p>
 <p>编译安装php<br>依赖安装：</p>
-<p>yum install php-mcrypt libmcrypt libmcrypt-devel libxml2-devel openssl-devel libcurl-devel libjpeg.x86_64 libpng.x86_64 freetype.x86_64 libjpeg-devel.x86_64 libpng-devel.x86_64 freetype-devel.x86_64 libjpeg-turbo-devel libmcrypt-devel mysql-devel -y<br>wget <a href="http://zy-res.oss-cn-hangzhou.aliyuncs.com/php/php-7.0.12.tar.gz" target="_blank" rel="noopener">http://zy-res.oss-cn-hangzhou.aliyuncs.com/php/php-7.0.12.tar.gz</a><br>tar zxvf php-7.0.12.tar.gz<br>cd php-7.0.12<br>./configure \<br>–prefix=/usr/local/php \<br>–with-mysql=mysqlnd –with-openssl \<br>–with-mysqli=mysqlnd \<br>–enable-mbstring \<br>–with-freetype-dir \<br>–with-jpeg-dir \<br>–with-png-dir \<br>–with-zlib –with-libxml-dir=/usr \<br>–enable-xml –enable-sockets \<br>–with-apxs2=/usr/local/apache/bin/apxs \<br>–with-mcrypt –with-config-file-path=/etc \<br>–with-config-file-scan-dir=/etc/php.d \<br>–enable-maintainer-zts \<br>–disable-fileinfo<br>make &amp;&amp; make install<br>复制配置文件<br>cd php-7.0.12<br>cp php.ini-production /etc/php.ini<br>编辑apache配置文件httpd.conf，以apache支持php<br>vim /etc/httpd/httpd.conf<br>在配置文件最后添加如下二行：</p>
-<p>AddType application/x-httpd-php .php<br>AddType application/x-httpd-php-source .phps<br>定位到 DirectoryIndex index.html</p>
+<pre><code>    #yum install php-mcrypt libmcrypt libmcrypt-devel libxml2-devel openssl-devel libcurl-devel libjpeg.x86_64 libpng.x86_64 freetype.x86_64 libjpeg-devel.x86_64 libpng-devel.x86_64 freetype-devel.x86_64 libjpeg-turbo-devel libmcrypt-devel mysql-devel -y
+    #wget http://zy-res.oss-cn-hangzhou.aliyuncs.com/php/php-7.0.12.tar.gz
+    #tar zxvf php-7.0.12.tar.gz
+    #cd php-7.0.12
+    #./configure \
+--prefix=/usr/local/php \
+--with-mysql=mysqlnd --with-openssl \
+--with-mysqli=mysqlnd \
+--enable-mbstring \
+--with-freetype-dir \
+--with-jpeg-dir \
+--with-png-dir \
+--with-zlib --with-libxml-dir=/usr \
+--enable-xml --enable-sockets \
+--with-apxs2=/usr/local/apache/bin/apxs \
+--with-mcrypt --with-config-file-path=/etc \
+--with-config-file-scan-dir=/etc/php.d \
+--enable-maintainer-zts \
+--disable-fileinfo
+    #make &amp;&amp; make install
+</code></pre><p>复制配置文件<br>cd php-7.0.12<br>cp php.ini-production /etc/php.ini<br>编辑apache配置文件httpd.conf，以apache支持php</p>
+<pre><code>#vim /etc/httpd/httpd.conf
+</code></pre><p>在配置文件最后添加如下二行：</p>
+<pre><code>#AddType application/x-httpd-php .php
+#AddType application/x-httpd-php-source .phps
+</code></pre><p>定位到 DirectoryIndex index.html</p>
 <p>修改为：</p>
-<p>DirectoryIndex index.php index.html<br>重启apache服务<br>/usr/local/apache/bin/apachectl restart<br>测试是否能够正常解析PHP<br>cd /usr/local/apache/htdocs/<br>vim index.php #添加如下内容<br>&lt;?php<br>phpinfo();<br>?&gt;<br>访问云服务器的公网IP/index.php，出现如下页面表示解析成功。</p>
-<p>9</p>
-<p>安装phpmyadmin<br>mkdir -p /usr/local/apache/htdocs/phpmyadmin<br>cd /usr/local/src/<br>wget <a href="http://oss.aliyuncs.com/aliyunecs/onekey/phpMyAdmin-4.1.8-all-languages.zip" target="_blank" rel="noopener">http://oss.aliyuncs.com/aliyunecs/onekey/phpMyAdmin-4.1.8-all-languages.zip</a><br>unzip phpMyAdmin-4.1.8-all-languages.zip<br>mv phpMyAdmin-4.1.8-all-languages/* /usr/local/apache/htdocs/phpmyadmin<br>访问ip/phpmyadmin即可访问到phpmyadmin登录页面，输入mysql的用户名以及密码即可登录。10</p>
+<p>DirectoryIndex index.php index.html<br>重启apache服务</p>
+<pre><code>#/usr/local/apache/bin/apachectl restart
+</code></pre><p>测试是否能够正常解析PHP</p>
+<pre><code>#cd /usr/local/apache/htdocs/
+</code></pre><p>vim index.php #添加如下内容<br>    &lt;?php<br>        phpinfo();<br>    ?&gt;<br>访问云服务器的公网IP/index.php，出现如下页面表示解析成功。</p>
+<p><img src="/images/c3143ee7b96bfe34f8d32f0eecd5053b.png" alt=""></p>
+<p>安装phpmyadmin</p>
+<pre><code>#mkdir -p /usr/local/apache/htdocs/phpmyadmin
+#cd /usr/local/src/
+#wget http://oss.aliyuncs.com/aliyunecs/onekey/phpMyAdmin-4.1.8-all-languages.zip
+#unzip phpMyAdmin-4.1.8-all-languages.zip
+#mv phpMyAdmin-4.1.8-all-languages/* /usr/local/apache/htdocs/phpmyadmin
+</code></pre><p>访问ip/phpmyadmin即可访问到phpmyadmin登录页面，输入mysql的用户名以及密码即可登录。</p>
+<p><img src="/images/764fbec1647ac8ec0fb3c2379ba04cd7.png" alt=""></p>
 
       
     </div>
@@ -849,7 +973,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">10.3k</span>
+    <span title="Site words total count">10.4k</span>
   
 </div>
 
